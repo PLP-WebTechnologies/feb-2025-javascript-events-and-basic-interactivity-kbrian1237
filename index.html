@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage Assignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        button {
+            margin-right: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simple Interactive Webpage</h1>
+
+    <!-- Form -->
+    <form id="contactForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="message" id="formMessage"></div>
+
+    <!-- Interactive Buttons -->
+    <h2>Click the Buttons!</h2>
+    <button id="changeColorBtn">Change Background Color</button>
+    <button id="showAlertBtn">Show Alert</button>
+
+    <script>
+        // Form Validation
+        const form = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from refreshing page
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (name === '' || email === '') {
+                formMessage.textContent = 'Please fill out all fields.';
+                formMessage.style.color = 'red';
+            } else if (!email.includes('@')) {
+                formMessage.textContent = 'Please enter a valid email address.';
+                formMessage.style.color = 'red';
+            } else {
+                formMessage.textContent = `Thank you, ${name}! Your form was submitted successfully.`;
+                formMessage.style.color = 'green';
+                form.reset();
+            }
+        });
+
+        // Interactive Elements
+        const changeColorBtn = document.getElementById('changeColorBtn');
+        const showAlertBtn = document.getElementById('showAlertBtn');
+
+        changeColorBtn.addEventListener('click', function() {
+            document.body.style.backgroundColor = getRandomColor();
+        });
+
+        showAlertBtn.addEventListener('click', function() {
+            alert('Button was clicked!');
+        });
+
+        // Helper function to get random color
+        function getRandomColor() {
+            const colors = ['lightblue', 'lightgreen', 'lightpink', 'lightyellow', 'lavender'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+
+</body>
+</html>
